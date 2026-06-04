@@ -4,21 +4,22 @@ namespace App\Livewire;
 
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class CreateArticleForm extends Component
 {
-    #[validate('required|min:5')]
+    #[Validate('required|min:5')]
     public $title;
-    #[validate('required|min:10')]
+    #[Validate('required|min:10')]
     public $description;
-    #[validate('required|numeric')]
+    #[Validate('required|numeric')]
     public $price;
-    #[validate('required')]
+    #[Validate('required')]
     public $category;
     public $article;
 
-    public function store(){
+    public function save(){
         $this->validate();
         $this->article = Article::create([
             'title' => $this->title,
@@ -29,7 +30,7 @@ class CreateArticleForm extends Component
         ]);
 
         $this->reset();
-        session()->flash('success', 'Articolo creato correttamente');
+        session()->flash('message', 'Articolo creato correttamente');
     }
 
     public function render()
