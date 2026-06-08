@@ -17,6 +17,20 @@
             </div>
         </div>
 
+        @if (session()->has('last_review_action'))
+            <div class="row justify-content-center mb-4">
+                <div class="col-12 col-lg-8 text-center">
+                    <form action="{{ route('revisor.undo') }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-warning px-4 py-2 fw-bold">
+                            Annulla ultima operazione
+                        </button>
+                    </form>
+                </div>
+            </div>
+        @endif
+
         @if ($article_to_check)
             <div class="row g-4 align-items-start">
                 <div class="col-12 col-lg-7">
@@ -56,16 +70,6 @@
                                         </button>
                                     </form>
                                 </div>
-
-                                @if (session()->has('last_review_action'))
-                                    <form action="{{ route('revisor.undo') }}" method="POST" class="mt-3">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button class="btn btn-warning w-100 py-2 fw-bold">
-                                            Annulla ultima operazione
-                                        </button>
-                                    </form>
-                                @endif
                             </div>
                         </div>
                     </div>
