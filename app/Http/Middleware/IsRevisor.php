@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,5 +21,13 @@ class IsRevisor
         return $next($request);
         }
         return redirect()->route('home')->with('errorMessage', 'Zona riservata ai revisori');
+    }
+}
+
+class SetLocaleMiddleware{
+    public function handle(Request $request, Closure $next): Response{
+        $localeLanguage = session('locale', 'it');
+        App::setLocale($localeLanguage);
+        return $next($request);
     }
 }

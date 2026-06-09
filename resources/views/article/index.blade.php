@@ -3,7 +3,7 @@
         <div class="row justify-content-center align-items-center text-center">
             <div class="col-12">
                 <h1 class="display-1">
-                    Tutti gli articoli
+                    @lang('ui.allArticles')
                 </h1>
             </div>
         </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="d-flex justify-content-center">
         <div>
-            {{$articles->links()}}
+            {{ $articles->links() }}
         </div>
     </div>
 </x-layout>

@@ -14,7 +14,9 @@
 
                 <div class="my-3">
                     @auth
-                        <a href="{{ route('create.article') }}" class="btn btn-dark">Pubblica un articolo</a>
+                        <a href="{{ route('create.article') }}" class="btn btn-dark">
+                            {{ __('ui.publishArticle') }}
+                        </a>
                     @endauth
                 </div>
             </div>
@@ -24,8 +26,8 @@
     <section class="container pb-5">
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
             <div>
-                <h2 class="fw-bold mb-1">Articoli recenti</h2>
-                <p class="text-muted mb-0">Gli ultimi 6 articoli approvati dai revisori.</p>
+                <h2 class="fw-bold mb-1">{{ __('ui.recentArticles') }}</h2>
+                <p class="text-muted mb-0">{{ __('ui.latestApprovedArticles') }}</p>
             </div>
         </div>
 
@@ -38,7 +40,7 @@
 
                         <div class="card-body d-flex flex-column p-4">
                             <div class="mb-2">
-                                <span class="badge text-bg-light border">Articolo approvato</span>
+                                <span class="badge text-bg-light border">{{ __('ui.approvedArticle') }}</span>
                             </div>
 
                             <h5 class="card-title fw-bold">{{ $article->title }}</h5>
@@ -51,7 +53,7 @@
                                 <span class="fs-5 fw-bold text-body">{{ $article->price }} €</span>
                                 <a href="{{ route('article.show', compact('article')) }}"
                                     class="btn btn-outline-secondary">
-                                    Dettagli
+                                    {{ __('ui.details') }}
                                 </a>
                             </div>
                         </div>
@@ -60,9 +62,9 @@
             @empty
                 <div class="col-12">
                     <div class="p-5 text-center bg-body-tertiary rounded-4 border shadow-sm">
-                        <h3 class="h4 fw-bold mb-2">Nessun articolo disponibile</h3>
+                        <h3 class="h4 fw-bold mb-2">{{ __('ui.noArticlesAvailable') }}</h3>
                         <p class="text-muted mb-0">
-                            Al momento non ci sono articoli approvati da mostrare in homepage.
+                            {{ __('ui.noApprovedArticlesHomepage') }}
                         </p>
                     </div>
                 </div>

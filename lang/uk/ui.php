@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'navbarBrand' => 'Navbar',
+    'toggleNavigation' => 'Open navigation',
+    'home' => 'Home',
+    'welcomeUser' => 'Welcome, :name',
+    'createArticle' => 'Create article',
+    'logout' => 'Logout',
+    'revisorZone' => 'Reviewer area',
+    'helloUser' => 'Hello, user!',
+    'login' => 'Login',
+    'register' => 'Register',
+    'allArticles' => 'All articles',
+    'categories' => 'Categories',
+    'darkMode' => 'Dark',
+    'search' => 'Search',
+    'publishArticle' => 'Publish an article',
+    'recentArticles' => 'Recent articles',
+    'latestApprovedArticles' => 'The latest 6 articles approved by reviewers.',
+    'approvedArticle' => 'Approved article',
+    'details' => 'Details',
+    'noArticlesAvailable' => 'No articles available',
+    'noApprovedArticlesHomepage' => 'There are currently no approved articles to show on the homepage.',
+];

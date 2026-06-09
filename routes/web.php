@@ -22,3 +22,7 @@ Route::patch('/revisor/undo', [RevisorController::class, 'undo'])->name('revisor
 
 //ricerca
 Route::get('/search/article', [PublicController::class, 'searchArticles'])->name('article.search');
+
+
+//set lingua
+Route::post('/lingua/{lang}', [PublicController::class, 'setLanguage'])->name('setLocale');

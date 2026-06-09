@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'navbarBrand' => 'Navbar',
+    'toggleNavigation' => 'Apri navigazione',
+    'home' => 'Home',
+    'welcomeUser' => 'Benvenuto, :name',
+    'createArticle' => 'Crea articolo',
+    'logout' => 'Logout',
+    'revisorZone' => 'Zona revisore',
+    'helloUser' => 'Ciao, utente!',
+    'login' => 'Accedi',
+    'register' => 'Registrati',
+    'allArticles' => 'Tutti gli articoli',
+    'categories' => 'Categorie',
+    'darkMode' => 'Scuro',
+    'search' => 'Cerca',
+    'publishArticle' => 'Pubblica un articolo',
+    'recentArticles' => 'Articoli recenti',
+    'latestApprovedArticles' => 'Gli ultimi 6 articoli approvati dai revisori.',
+    'approvedArticle' => 'Articolo approvato',
+    'details' => 'Dettagli',
+    'noArticlesAvailable' => 'Nessun articolo disponibile',
+    'noApprovedArticlesHomepage' => 'Al momento non ci sono articoli approvati da mostrare in homepage.',
+];
