@@ -20,7 +20,8 @@
                             {{ __('ui.welcomeUser', ['name' => Auth::user()->name]) }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('create.article') }}">{{ __('ui.createArticle') }}</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('create.article') }}">{{ __('ui.createArticle') }}</a></li>
                             <li>
                                 <a class="dropdown-item" href="#"
                                     onclick="event.preventDefault(); document.querySelector('#form-logout').submit();">
@@ -38,7 +39,8 @@
                             <a href="{{ route('revisor.index') }}"
                                 class="nav-link btn btn-outline-success btn-sm position-relative">
                                 {{ __('ui.revisorZone') }}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {{ \App\Models\Article::toBeRevisedCount() }}
                                 </span>
                             </a>
@@ -70,9 +72,10 @@
                         @foreach ($categories as $category)
                             <li>
                                 <a class="dropdown-item" href="{{ route('byCategory', ['category' => $category]) }}">
-                                    {{ $category->name }}
+                                    {{ __('ui.' . $category->name) }}
                                 </a>
                             </li>
+
                             @if (!$loop->last)
                                 <li>
                                     <hr class="dropdown-divider">
@@ -92,8 +95,8 @@
 
                 <form action="{{ route('article.search') }}" class="d-flex" role="search" method="get">
                     <div class="input-group">
-                        <input type="search" name="query" class="form-control"
-                            placeholder="{{ __('ui.search') }}" aria-label="{{ __('ui.search') }}">
+                        <input type="search" name="query" class="form-control" placeholder="{{ __('ui.search') }}"
+                            aria-label="{{ __('ui.search') }}">
                         <button type="submit" class="btn btn-outline-success">{{ __('ui.search') }}</button>
                     </div>
                 </form>
