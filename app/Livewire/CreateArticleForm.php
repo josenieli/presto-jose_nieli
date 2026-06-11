@@ -76,4 +76,11 @@ class CreateArticleForm extends Component
             $this->images = array_values($this->images);
         }
     }
+    protected function cleanForm(){
+        $this->title = '';
+        $this->description = '';
+        $this->price = '';
+        $this->category = '';
+        $this->images = [];
+    }
 }

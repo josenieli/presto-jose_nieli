@@ -1,5 +1,5 @@
 <div class="card mx-auto mb-4 shadow rounded-4 overflow-hidden text-center border border-2" style="width: 18rem;">
-    <img src="https://picsum.photos/200"
+    <img src="{{$article->images->isNotEmpty() ? Storage::url($article->images->first()->path) : 'https://picsum.photos/200'}}"
         class="card-img-top object-fit-cover"
         alt="Immagine dell'articolo {{ $article->title }}">
 

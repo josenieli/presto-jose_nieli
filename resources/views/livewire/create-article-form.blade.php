@@ -16,8 +16,12 @@
                     <div class="row g-4">
                         <div class="col-12">
                             <label for="title" class="form-label fw-semibold">Titolo</label>
-                            <input type="text" class="form-control form-control-lg @error('title') is-invalid @enderror"
-                                id="title" wire:model.blur="title">
+                            <input
+                                type="text"
+                                id="title"
+                                wire:model.blur="title"
+                                class="form-control form-control-lg @error('title') is-invalid @enderror"
+                            >
                             @error('title')
                                 <p class="fst-italic text-danger small mt-2 mb-0">{{ $message }}</p>
                             @enderror
@@ -25,19 +29,26 @@
 
                         <div class="col-12">
                             <label for="description" class="form-label fw-semibold">Descrizione</label>
-                            <textarea id="description" rows="6"
+                            <textarea
+                                id="description"
+                                rows="6"
+                                wire:model.blur="description"
                                 class="form-control @error('description') is-invalid @enderror"
-                                wire:model.blur="description"></textarea>
+                            ></textarea>
                             @error('description')
                                 <p class="fst-italic text-danger small mt-2 mb-0">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="col-12 col-md-6">
-                            <label class="form-label fw-semibold" for="price">Prezzo</label>
+                            <label for="price" class="form-label fw-semibold">Prezzo</label>
                             <div class="input-group">
-                                <input type="text" class="form-control @error('price') is-invalid @enderror"
-                                    id="price" wire:model.blur="price">
+                                <input
+                                    type="text"
+                                    id="price"
+                                    wire:model.blur="price"
+                                    class="form-control @error('price') is-invalid @enderror"
+                                >
                                 <span class="input-group-text">€</span>
                             </div>
                             @error('price')
@@ -47,9 +58,12 @@
 
                         <div class="col-12 col-md-6">
                             <label for="category" class="form-label fw-semibold">Categoria</label>
-                            <select id="category" wire:model.blur="category"
-                                class="form-select @error('category') is-invalid @enderror">
-                                <option value="" selected disabled>Seleziona una categoria</option>
+                            <select
+                                id="category"
+                                wire:model.blur="category"
+                                class="form-select @error('category') is-invalid @enderror"
+                            >
+                                <option value="" disabled selected>Seleziona una categoria</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
@@ -60,10 +74,14 @@
                         </div>
 
                         <div class="col-12">
-                            <label class="form-label fw-semibold">Immagini</label>
-                            <input type="file" wire:model.live="temporary_images" multiple
+                            <label for="temporary_images" class="form-label fw-semibold">Immagini</label>
+                            <input
+                                id="temporary_images"
+                                type="file"
+                                wire:model.live="temporary_images"
+                                multiple
                                 class="form-control shadow-sm @error('temporary_images.*') is-invalid @enderror"
-                                placeholder="Img/">
+                            >
                             @error('temporary_images.*')
                                 <p class="fst-italic text-danger small mt-2 mb-0">{{ $message }}</p>
                             @enderror
@@ -74,23 +92,25 @@
 
                         @if (!empty($images))
                             <div class="col-12">
-                                <div class="border border-2 border-success-subtle rounded-4 bg-white shadow-sm p-4">
-                                    <p class="fw-semibold mb-3 text-success">Anteprima foto</p>
-                                    <div class="row g-3">
-                                        @foreach ($images as $key => $image)
-                                            <div class="col-6 col-md-4 col-lg-3">
-                                                <div class="card border-0 shadow-sm rounded-4 h-100">
-                                                    <div class="img-preview rounded-top-4"
-                                                        style="background-image: url({{ $images->temporaryUrl() }}); min-height: 180px; background-size: cover; background-position: center;">
-                                                    </div>
-                                                    <div class="card-body text-center py-2">
-                                                        <small class="text-muted">Immagine {{ $key + 1 }}</small>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn mt-1 btn-danger" wire:click="removeImage({{$key}})"></button>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                <p>Photo preview:</p>
+
+                                <div class="row border border-4 border-success rounded shadow py-4">
+                                    @foreach ($images as $key => $image)
+                                        <div class="col d-flex flex-column align-items-center my-3">
+                                            <div
+                                                class="img-preview mx-auto shadow rounded"
+                                                style="background-image: url('{{ $image->temporaryUrl() }}');"
+                                            ></div>
+
+                                            <button
+                                                type="button"
+                                                class="btn mt-1 btn-danger"
+                                                wire:click="removeImage({{ $key }})"
+                                            >
+                                                X
+                                            </button>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         @endif

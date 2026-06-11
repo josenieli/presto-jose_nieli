@@ -34,12 +34,30 @@
         @if ($article_to_check)
             <div class="row g-4 align-items-start">
                 <div class="col-12 col-lg-7">
-                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                        <img
-                            src="https://picsum.photos/seed/article-{{ $article_to_check->id }}/900/600"
-                            class="img-fluid w-100"
-                            alt="Immagine articolo {{ $article_to_check->title }}"
-                        >
+                    <div class="row g-3">
+                        @forelse ($article_to_check->images as $key => $image)
+                            <div class="col-6 col-md-4">
+                                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                                    <img
+                                        src="{{ Storage::url($image->path) }}"
+                                        class="img-fluid w-100"
+                                        alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}"
+                                    >
+                                </div>
+                            </div>
+                        @empty
+                            @for ($i = 0; $i < 6; $i++)
+                                <div class="col-6 col-md-4">
+                                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                                        <img
+                                            src="https://picsum.photos/200?random={{ $i }}"
+                                            alt="Immagine segnaposto"
+                                            class="img-fluid w-100"
+                                        >
+                                    </div>
+                                </div>
+                            @endfor
+                        @endforelse
                     </div>
                 </div>
 
