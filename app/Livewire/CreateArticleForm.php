@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Jobs\ResizeImage;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -44,14 +45,10 @@ class CreateArticleForm extends Component
         if (count($this->images) > 0) {
             foreach ($this->images as $image) {
                 $newFileName = "articles/{$this->article->id}";
-                $path = $image->store($newFileName, 'public');
-
-                $newImage = $this->article->images()->create([
-                    'path' => $path
-                ]);
-
-                ResizeImage::dispatch($newImage->path, 300, 300);
+                $newImage = $this->article->images()->create(['path'=> $image->store($newFileName, 'public')]);
+                dispatch(new ResizeImage ($newImage->path, 300, 300));
             }
+            File::deleteDirectory(storage_path('/app/livewire-tmp'));
         }
 
         $this->cleanForm();

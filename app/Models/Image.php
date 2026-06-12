@@ -20,22 +20,20 @@ class Image extends Model
         return $this->belongsTo(Article::class);
     }
 
-public function getUrl($w = null, $h = null)
+public static function getUrlByFilePath($filePath, $w = null, $h = null)
 {
     if (!$w && !$h) {
-        return Storage::url($this->path);
+        return Storage::url($filePath);
     }
 
-    $path = dirname($this->path);
-    $filename = basename($this->path);
+    $path = dirname($filePath);
+    $filename = basename($filePath);
 
-    $file = ($path === '.' ? '' : $path . '/')
-        . "crop_{$w}x{$h}_{$filename}";
-
-    if (Storage::disk('public')->exists($file)) {
-        return Storage::url($file);
+    $file = "{$path}/crop_{$w}x{$h}_{$filename}";
+    return Storage::url($file);
     }
-
-    return Storage::url($this->path);
-}
+    
+    public function getUrl($w = null, $h= null){
+        return self::getUrlByFilePath($this->path, $w, $h);
+    }
 }

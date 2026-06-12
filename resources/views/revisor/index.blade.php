@@ -8,56 +8,41 @@
         </div>
     @endif
 
-    <div class="container py-5">
-        <div class="row justify-content-center mb-5">
-            <div class="col-12 col-lg-8">
-                <div class="bg-body-tertiary rounded-4 shadow-sm border text-center p-4">
-                    <h1 class="display-5 mb-0">Revisor dashboard</h1>
+    @if ($article_to_check)
+        <div class="container py-5">
+            <div class="row justify-content-center mb-5">
+                <div class="col-12 col-lg-8">
+                    <div class="bg-body-tertiary rounded-4 shadow-sm border text-center p-4">
+                        <h1 class="display-5 mb-0">Revisor dashboard</h1>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        @if (session()->has('last_review_action'))
-            <div class="row justify-content-center mb-4">
-                <div class="col-12 col-lg-8 text-center">
-                    <form action="{{ route('revisor.undo') }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <button class="btn btn-warning px-4 py-2 fw-bold">
-                            Annulla ultima operazione
-                        </button>
-                    </form>
+            @if (session()->has('last_review_action'))
+                <div class="row justify-content-center mb-4">
+                    <div class="col-12 col-lg-8 text-center">
+                        <form action="{{ route('revisor.undo') }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button class="btn btn-warning px-4 py-2 fw-bold">
+                                Annulla ultima operazione
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
-        @if ($article_to_check)
-            <div class="row g-4 align-items-start">
+            <div class="row justify-content-center g-4">
                 <div class="col-12 col-lg-7">
                     <div class="row g-3">
-                        @forelse ($article_to_check->images as $key => $image)
+                        @foreach ($article_to_check->images as $key => $image)
                             <div class="col-6 col-md-4">
                                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                                    <img
-                                        src="{{ $image->getUrl(300, 300) }}"
-                                        class="img-fluid w-100"
-                                        alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}"
-                                    >
+                                    <img src="{{ asset('storage/' . $image->path) }}" class="img-fluid"
+                                        style="max-height: 300px;"
+                                        alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}">
                                 </div>
-                            </div>
-                        @empty
-                            @for ($i = 0; $i < 6; $i++)
-                                <div class="col-6 col-md-4">
-                                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                                        <img
-                                            src="https://picsum.photos/200?random={{ $i }}"
-                                            alt="Immagine segnaposto"
-                                            class="img-fluid w-100"
-                                        >
-                                    </div>
-                                </div>
-                            @endfor
-                        @endforelse
+                        @endforeach
                     </div>
                 </div>
 
@@ -72,7 +57,8 @@
 
                             <div class="mt-auto">
                                 <div class="d-grid gap-3 d-md-flex">
-                                    <form action="{{ route('reject', ['article' => $article_to_check]) }}" method="POST" class="w-100">
+                                    <form action="{{ route('reject', ['article' => $article_to_check]) }}"
+                                        method="POST" class="w-100">
                                         @csrf
                                         @method('PATCH')
                                         <button class="btn btn-danger w-100 py-2 fw-bold">
@@ -80,7 +66,8 @@
                                         </button>
                                     </form>
 
-                                    <form action="{{ route('accept', ['article' => $article_to_check]) }}" method="POST" class="w-100">
+                                    <form action="{{ route('accept', ['article' => $article_to_check]) }}"
+                                        method="POST" class="w-100">
                                         @csrf
                                         @method('PATCH')
                                         <button class="btn btn-success w-100 py-2 fw-bold">
@@ -93,8 +80,10 @@
                     </div>
                 </div>
             </div>
-        @else
-            <div class="row justify-content-center text-center py-5">
+        </div>
+    @else
+        <div class="container py-5">
+            <div class="row justify-content-center text-center">
                 <div class="col-12 col-lg-8">
                     <div class="card border-0 shadow-sm rounded-4 p-5">
                         <h1 class="fst-italic display-5 mb-4">Nessun articolo da revisionare</h1>
@@ -104,6 +93,6 @@
                     </div>
                 </div>
             </div>
-        @endif
-    </div>
+        </div>
+    @endif
 </x-layout>
