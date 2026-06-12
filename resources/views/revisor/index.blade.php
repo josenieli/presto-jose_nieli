@@ -39,7 +39,7 @@
                             <div class="col-6 col-md-4">
                                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                                     <img
-                                        src="{{ Storage::url($image->path) }}"
+                                        src="{{ $image->getUrl(300, 300) }}"
                                         class="img-fluid w-100"
                                         alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}"
                                     >

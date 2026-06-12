@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Jobs\ResizeImage;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
@@ -42,13 +43,18 @@ class CreateArticleForm extends Component
 
         if (count($this->images) > 0) {
             foreach ($this->images as $image) {
-                $this->article->images()->create([
-                    'path' => $image->store('images', 'public')
+                $newFileName = "articles/{$this->article->id}";
+                $path = $image->store($newFileName, 'public');
+
+                $newImage = $this->article->images()->create([
+                    'path' => $path
                 ]);
+
+                ResizeImage::dispatch($newImage->path, 300, 300);
             }
         }
 
-        $this->reset();
+        $this->cleanForm();
         session()->flash('message', 'Articolo creato correttamente');
     }
 
@@ -76,11 +82,14 @@ class CreateArticleForm extends Component
             $this->images = array_values($this->images);
         }
     }
-    protected function cleanForm(){
+
+    protected function cleanForm()
+    {
         $this->title = '';
         $this->description = '';
         $this->price = '';
         $this->category = '';
         $this->images = [];
+        $this->temporary_images = [];
     }
 }
