@@ -35,7 +35,7 @@
                         @endif
                     </div>
                 @else
-                    <img src="https://picsum.photos/400"
+                    <img src="https://picsum.photos/300"
                         class="img-fluid rounded shadow article-detail-img"
                         alt="Nessuna foto inserita dall'utente">
                 @endif

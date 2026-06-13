@@ -51,8 +51,9 @@ class CreateArticleForm extends Component
             File::deleteDirectory(storage_path('/app/livewire-tmp'));
         }
 
-        $this->cleanForm();
+        
         session()->flash('message', 'Articolo creato correttamente');
+        $this->cleanForm();
     }
 
     public function render()
