@@ -36,24 +36,76 @@
                 <div class="col-12 col-lg-7">
                     <div class="row g-3">
                         @forelse ($article_to_check->images as $key => $image)
-                            <div class="col-6 col-md-4">
+                            <div class="col-12">
                                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                                    <img
-                                        src="{{ $image->getUrl(300, 300) }}"
-                                        class="img-fluid w-100"
-                                        alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}"
-                                    >
+                                    <div class="row g-0 align-items-start">
+                                        <div class="col-12 col-md-4">
+                                            <img src="{{ $image->getUrl(300, 300) }}" class="img-fluid w-100"
+                                                alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}">
+                                        </div>
+
+                                        <div class="col-12 col-md-5 ps-md-3">
+                                            <div class="card-body">
+                                                <h5>Labels</h5>
+                                                @if ($image->labels)
+                                                    @foreach ($image->labels as $label)
+                                                        #{{ $label }},
+                                                    @endforeach
+                                                @else
+                                                    <p class="fst-italic">No labels</p>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-3">
+                                            <div class="card-body">
+                                                <h5 class="">Ratings</h5>
+
+                                                <div class="row justify-content-center">
+                                                    <div class="col-2">
+                                                        <div class="text-center mx-auto {{ $image->adult }}"></div>
+                                                    </div>
+                                                    <div class="col-10">adult</div>
+                                                </div>
+
+                                                <div class="row justify-content-center">
+                                                    <div class="col-2">
+                                                        <div class="text-center mx-auto {{ $image->violence }}"></div>
+                                                    </div>
+                                                    <div class="col-10">violence</div>
+                                                </div>
+
+                                                <div class="row justify-content-center">
+                                                    <div class="col-2">
+                                                        <div class="text-center mx-auto {{ $image->spoof }}"></div>
+                                                    </div>
+                                                    <div class="col-10">spoof</div>
+                                                </div>
+
+                                                <div class="row justify-content-center">
+                                                    <div class="col-2">
+                                                        <div class="text-center mx-auto {{ $image->racy }}"></div>
+                                                    </div>
+                                                    <div class="col-10">racy</div>
+                                                </div>
+
+                                                <div class="row justify-content-center">
+                                                    <div class="col-2">
+                                                        <div class="text-center mx-auto {{ $image->medical }}"></div>
+                                                    </div>
+                                                    <div class="col-10">medical</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @empty
                             @for ($i = 0; $i < 6; $i++)
                                 <div class="col-6 col-md-4">
                                     <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                                        <img
-                                            src="https://picsum.photos/200?random={{ $i }}"
-                                            alt="Immagine segnaposto"
-                                            class="img-fluid w-100"
-                                        >
+                                        <img src="https://picsum.photos/200?random={{ $i }}"
+                                            alt="Immagine segnaposto" class="img-fluid w-100">
                                     </div>
                                 </div>
                             @endfor
@@ -72,7 +124,8 @@
 
                             <div class="mt-auto">
                                 <div class="d-grid gap-3 d-md-flex">
-                                    <form action="{{ route('reject', ['article' => $article_to_check]) }}" method="POST" class="w-100">
+                                    <form action="{{ route('reject', ['article' => $article_to_check]) }}" method="POST"
+                                        class="w-100">
                                         @csrf
                                         @method('PATCH')
                                         <button class="btn btn-danger w-100 py-2 fw-bold">
@@ -80,7 +133,8 @@
                                         </button>
                                     </form>
 
-                                    <form action="{{ route('accept', ['article' => $article_to_check]) }}" method="POST" class="w-100">
+                                    <form action="{{ route('accept', ['article' => $article_to_check]) }}" method="POST"
+                                        class="w-100">
                                         @csrf
                                         @method('PATCH')
                                         <button class="btn btn-success w-100 py-2 fw-bold">
